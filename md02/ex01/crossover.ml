@@ -1,38 +1,30 @@
 (* Allowed functions : None *)
 
-let found char list =
-  let rec aux c l =
-    match l with
-    | [] -> false
-    | el :: tail ->
-      if c = el then
-        true
-      else
-        aux c tail
+let found char lst =
+  let rec aux = function
+    | []                     -> false
+    | c :: cs when c = char  -> true
+    | c :: cs                -> aux cs
   in
-  aux char list
+  aux lst
 
-let crossover list1 list2 =
-  let rec aux1 res l1 = 
-    match l1 with
-    | [] -> res
-    | c1 :: tail1 ->
-      if found c1 res || not (found c1 list2) then
-        aux1 res tail1
-      else
-        aux1 (c1 :: res) tail1
+let crossover lst1 lst2 =
+  let rec aux res = function
+    | []                              -> res
+    | c :: cs when found c res        -> aux res cs         (* element is already a duplicate*)
+    | c :: cs when not (found c lst2) -> aux res cs         (* element is not in second list*)
+    | c :: cs                         -> aux (c :: res) cs
   in
-  aux1 [] list1
+  aux [] lst1
 
 
 (* Demonstration Program *)
 
-let rec print_char_list list =
-  match list with
+let rec print_char_list = function
   | [] -> print_newline ()
-  | x :: tail ->
-      print_char x;
-      print_char_list tail
+  | c :: cs ->
+      print_char c;
+      print_char_list cs
 
 let () =
   let l1 = ['a'; 'a'; 'a'; 'b'] in
