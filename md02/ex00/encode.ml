@@ -1,47 +1,45 @@
 (* Allowed functions : None *)
 
+(** Reverses a list *)
+let rev = function
+  | []            -> []
+  | elem :: []    -> [elem]
+  | elem :: elems ->
+    let rec aux acc = function
+      | []          -> acc
+      | el :: tail  -> aux (el :: acc) tail
+    in
+    aux [] elems
+
 (** 
-  * encodes a list of elements
+  * Encodes a list of elements
   * to a list of tuples containing
   * the element and the number of times it repeats
 *)
-let encode elems =
-  let rec aux list count char elems =
-    match elems with
-    | [] ->
-      list @ [(count, char)]
-    | x :: tail ->
-      if x = char then
-        aux list (count + 1) char tail
-      else
-        aux (list @ [(count, char)]) 1 x tail
-  in
-  match elems with
-    | [] -> []
-    | elem :: tail -> aux [] 1 elem tail
+let encode = function
+  | [] -> []
+  | elem :: elems ->
+    let rec aux acc count char = function
+      | []                     ->  rev ((count, char) :: acc)
+      | x :: xs when x = char  ->  aux acc (count + 1) char  xs
+      | x :: xs                ->  aux ((count, char) :: acc) 1 x xs
+    in
+    aux [] 1 elem elems
 
 (* Demonstration Program *)
 
-let rec print_char_list list =
-  match list with
+let rec print_char_list = function
   | [] -> print_newline ()
-  | x :: tail ->
-      print_char x;
-      print_char_list tail
+  | c :: cs ->
+    print_char c;
+    print_char_list cs
 
-let print_pair (a, b) =
-  print_int a;
-  print_char ' ';
-  print_int b;
-  print_newline ()
-
-let rec print_int_char_tuple_list list =
-  match list with
+let rec print_int_char_tuple_list = function
   | [] -> print_newline ()
   | (a, b) :: tail ->
-      print_int a;
-      print_char b;
-      print_int_char_tuple_list tail
+    print_int a;
+    print_char b;
+    print_int_char_tuple_list tail
 
 let () =
   let chars = ['a'; 'a'; 'a'; 'b'] in
