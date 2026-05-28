@@ -8,3 +8,7 @@ let rec ft_print_next_alphabet i =
 let ft_print_alphabet () =
   ft_print_next_alphabet (int_of_char 'a');
   print_char '\n'
+
+(* Demonstration Program *)
+let () =
+  ft_print_alphabet ()

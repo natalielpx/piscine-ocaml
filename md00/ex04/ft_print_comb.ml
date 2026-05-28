@@ -21,3 +21,7 @@ let rec ft_hundreds h =
 let ft_print_comb () =
   ft_hundreds 0;
   print_string "\n"
+
+(* Demonstration Program *)
+let () =
+  ft_print_comb ()
