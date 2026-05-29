@@ -1,15 +1,12 @@
 (* Allowed functions : None *)
 
 (** Reverses a list *)
-let rev = function
-  | []            -> []
-  | elem :: []    -> [elem]
-  | elem :: elems ->
-    let rec aux acc = function
-      | []          -> acc
-      | el :: tail  -> aux (el :: acc) tail
-    in
-    aux [] elems
+let rev lst=
+  let rec aux acc = function
+    | []        -> acc
+    | l :: tail -> aux (l :: acc) tail
+  in
+  aux [] lst
 
 (** 
   * Encodes a list of elements
@@ -21,7 +18,7 @@ let encode = function
   | elem :: elems ->
     let rec aux acc count char = function
       | []                     ->  rev ((count, char) :: acc)
-      | x :: xs when x = char  ->  aux acc (count + 1) char  xs
+      | x :: xs when x = char  ->  aux acc (count + 1) char xs
       | x :: xs                ->  aux ((count, char) :: acc) 1 x xs
     in
     aux [] 1 elem elems
