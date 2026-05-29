@@ -25,10 +25,10 @@ let () =
   print_cards Card.allClubs;
   print_newline ();
 
-  let ((v1, c1) as card1) = (Card.Value.T7, Card.Color.Diamond) in
-  let ((v2, c2) as card2) = (Card.Value.T9, Card.Color.Heart) in
-  let ((v3, c3) as card3) = (Card.Value.As, Card.Color.Club) in
-  let ((v4, c4) as card4) = (Card.Value.T2, Card.Color.Spade) in
+  let ((v1, c1) as card1) = Card.newCard Card.Value.T7 Card.Color.Diamond in
+  let ((v2, c2) as card2) = Card.newCard Card.Value.T9 Card.Color.Heart in
+  let ((v3, c3) as card3) = Card.newCard Card.Value.As Card.Color.Club in
+  let ((v4, c4) as card4) = Card.newCard Card.Value.T2 Card.Color.Spade in
   print_endline (Card.toStringVerbose card1);
   print_endline ("has a value of " ^ (Card.Value.toStringVerbose v1));
   print_endline ("and is of type " ^ (Card.Color.toStringVerbose c2));
