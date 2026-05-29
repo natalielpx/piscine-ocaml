@@ -1,7 +1,7 @@
 (* Allowed functions : None *)
 
 (** Reverses a list *)
-let rev lst=
+let rev lst =
   let rec aux acc = function
     | []        -> acc
     | l :: tail -> aux (l :: acc) tail
