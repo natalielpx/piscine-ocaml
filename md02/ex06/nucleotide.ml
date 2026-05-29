@@ -7,12 +7,7 @@ type phosphate = string
 type deoxyribose = string
 
 (** Create the variant type nucleobase. Its constructors are A, T, C, G, and None. *)
-type nucleobase = A
-                | U
-                | T
-                | C
-                | G
-                | None
+type nucleobase = A | U | T | C | G | None
 
 (* Prints a nucleobase *)
 let print_nucleobase base =
@@ -30,9 +25,7 @@ let print_nucleobase base =
   * one nucleobase.
   * The structure of the type nucleotide is up to you;
   * a record or a tuple will do the trick. *)
-type nucleotide = ( phosphate *
-                    deoxyribose *
-                    nucleobase )
+type nucleotide = ( phosphate * deoxyribose * nucleobase )
 
 (** Write a function generate_nucleotide that
   * returns a nucleotide
@@ -42,20 +35,24 @@ type nucleotide = ( phosphate *
   * Set the phosphate value to "phosphate" and
   * the deoxyribose value to "deoxyribose". *)
 let generate_nucleotide c = 
-  let nucleo : nucleobase =
+  let nucleo =
     match c with
     | 'A' -> A
     | 'U' -> U
     | 'T' -> T
     | 'C' -> C
     | 'G' -> G
-    | _ -> assert false
+    | _   -> assert false
   in
   ("phosphate", "deoxyribose", nucleo)
 
-(* Prints a nucleotide *)
+(** Prints a nucleotide *)
 let print_nucleotide nucleo =
-  match nucleo with (ph, db, nb) ->
-  print_endline ph;
-  print_endline db;
-  print_nucleobase nb;
+  let (ph, db, nb) = nucleo in
+  match nb with
+  | A     -> print_endline (ph ^ " " ^ db ^ " " ^ "A")
+  | U     -> print_endline (ph ^ " " ^ db ^ " " ^ "U")
+  | T     -> print_endline (ph ^ " " ^ db ^ " " ^ "T")
+  | C     -> print_endline (ph ^ " " ^ db ^ " " ^ "C")
+  | G     -> print_endline (ph ^ " " ^ db ^ " " ^ "G")
+  | None  -> raise (Invalid_argument "nucleobase type missing")

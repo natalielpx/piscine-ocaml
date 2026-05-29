@@ -1,5 +1,13 @@
 (* Allowed functions : None *)
 
+(** Reverses a list *)
+let rev lst =
+  let rec aux acc = function
+    | []        -> acc
+    | l :: tail -> aux (l :: acc) tail
+  in
+  aux [] lst
+
 (** Write a type rna as a list of elements of type nucleobase. *)
 type rna = Nucleotide.nucleobase list
 
@@ -21,30 +29,28 @@ type rna = Nucleotide.nucleobase list
   * The function must be typed as:
   * val generate_rna: helix -> rna. *)
 let generate_rna helix =
-  let rec aux comp list =
-    match list with
-    | [] -> comp
-    | nucl :: tail ->
-      let base =
-        match nucl with
-        | (_, _, Nucleotide.A) -> Nucleotide.U
-        | (_, _, Nucleotide.T) -> Nucleotide.A
-        | (_, _, Nucleotide.C) -> Nucleotide.G
-        | (_, _, Nucleotide.G) -> Nucleotide.C
-        | (_, _, _) -> assert false
+  let rec aux comp = function
+    | [] -> rev comp
+    | (_, _, base) :: tail ->
+      let nucl =
+        match base with
+        | Nucleotide.A    -> Nucleotide.U
+        | Nucleotide.T    -> Nucleotide.A
+        | Nucleotide.C    -> Nucleotide.G
+        | Nucleotide.G    -> Nucleotide.C
+        | Nucleotide.U    -> assert false
+        | Nucleotide.None -> assert false
       in
-      aux (comp @ [base]) tail
+      aux (nucl :: comp) tail
   in
   aux [] helix 
 
 (** Prints an rna *)
 let print_rna rna =
-  let rec aux tail =
-    match tail with
-    | [] -> print_newline ()
-    | base :: t ->
-      Nucleotide.print_nucleobase base;
-      aux t
+  let rec aux = function
+    | []            ->  print_newline ()
+    | base :: tail  ->  Nucleotide.print_nucleobase base;
+                        aux tail
   in
   aux rna
 

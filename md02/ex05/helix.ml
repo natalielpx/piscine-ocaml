@@ -1,5 +1,13 @@
 (* Allowed functions : String concatenation operator and Random module *)
 
+(** Reverses a list *)
+let rev lst =
+  let rec aux acc = function
+    | []        -> acc
+    | l :: tail -> aux (l :: acc) tail
+  in
+  aux [] lst
+
 (* Write an helix type that is a list of elements of type nucleotide. *)
 type helix = Nucleotide.nucleotide list
 
@@ -21,7 +29,7 @@ let generate_helix n =
         | 3 -> 'G'
         | _ -> assert false
       in
-      aux ([Nucleotide.generate_nucleotide base] @ acc) (i - 1)
+      aux ((Nucleotide.generate_nucleotide base) :: acc) (i - 1)
   in
   aux [] n
 
@@ -32,19 +40,18 @@ let generate_helix n =
   * The function must be typed as
   * val helix_to_string : helix -> string. *)
 let helix_to_string lst =
-  let rec aux acc l =
-    match l with
+  let rec aux acc = function
     | [] -> acc
-    | nucl :: tail -> 
-      let n =
-        match nucl with
-        | (_, _, Nucleotide.A) -> "A"
-        | (_, _, Nucleotide.T) -> "T"
-        | (_, _, Nucleotide.C) -> "C"
-        | (_, _, Nucleotide.G) -> "G"
-        | (_, _, _) -> assert false
+    | (_, _, base) :: tail -> 
+      let char =
+        match base with
+        | Nucleotide.A    -> "A"
+        | Nucleotide.T    -> "T"
+        | Nucleotide.C    -> "C"
+        | Nucleotide.G    -> "G"
+        | Nucleotide.None -> "?"
       in
-      aux (acc ^ n) tail
+      aux (acc ^ char) tail
   in
   aux "" lst
 
@@ -59,19 +66,18 @@ let helix_to_string lst =
   * The function must be typed as:
   * val complementary_helix : helix -> helix *)
 let complementary_helix helix =
-  let rec aux comp list =
-    match list with
-    | [] -> comp
-    | nucl :: tail ->
+  let rec aux comp = function
+    | [] -> rev comp
+    | (_, _, nucl) :: tail -> 
       let base =
         match nucl with
-        | (_, _, Nucleotide.A) -> 'T'
-        | (_, _, Nucleotide.T) -> 'A'
-        | (_, _, Nucleotide.C) -> 'G'
-        | (_, _, Nucleotide.G) -> 'C'
-        | (_, _, _) -> assert false
+        | Nucleotide.A    -> 'T'
+        | Nucleotide.T    -> 'A'
+        | Nucleotide.C    -> 'G'
+        | Nucleotide.G    -> 'C'
+        | Nucleotide.None -> assert false
       in
-      aux (comp @ [(Nucleotide.generate_nucleotide base)]) tail
+      aux ((Nucleotide.generate_nucleotide base) :: comp) tail
   in
   aux [] helix 
 
