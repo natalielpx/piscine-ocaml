@@ -2,7 +2,7 @@
 (* Are print functions allowed? *)
 
 let rec ft_power x y =
-  if x < 0 || y < 0 then assert false;
+  if x < 0 || y < 0 then raise (Invalid_argument "Both x and y must be positive");
   let rec aux acc = function
     | (_, 0)    -> 1
     | (0, _)    -> 0
