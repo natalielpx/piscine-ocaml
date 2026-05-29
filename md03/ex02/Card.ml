@@ -35,36 +35,16 @@ type t = (Value.t * Color.t)
 let newCard value color = (value, color)
 
 (* val allSpades : t list *)
-let allSpades =
-  let rec aux acc = function
-    | [] -> List.rev acc
-    | v :: vs -> aux ((v, Color.Spade) :: acc) vs
-  in
-  aux [] Value.all
+let allSpades = List.map (fun v -> newCard v Color.Spade) Value.all
 
 (* val allHearts : t list *)
-let allHearts =
-  let rec aux acc = function
-    | [] -> List.rev acc
-    | v :: vs -> aux ((v, Color.Heart) :: acc) vs
-  in
-  aux [] Value.all
+let allHearts = List.map (fun v -> newCard v Color.Heart) Value.all
 
 (* val allDiamonds : t list *)
-let allDiamonds =
-  let rec aux acc = function
-    | [] -> List.rev acc
-    | v :: vs -> aux ((v, Color.Diamond) :: acc) vs
-  in
-  aux [] Value.all
+let allDiamonds = List.map (fun v -> newCard v Color.Diamond) Value.all
 
 (* val allClubs : t list *)
-let allClubs =
-  let rec aux acc = function
-    | [] -> List.rev acc
-    | v :: vs -> aux ((v, Color.Club) :: acc) vs
-  in
-  aux [] Value.all
+let allClubs = List.map (fun v -> newCard v Color.Club) Value.all
 
 (* val all : t list *)
 let all = allSpades @ allHearts @ allDiamonds @ allClubs
@@ -92,13 +72,8 @@ let min c1 c2 = if compare c1 c2 <= 0 then c1 else c2
 
 (* val best : t list -> t *)
 let best = function
-  | []      -> invalid_arg "empty list"
-  | card :: cards ->
-    let rec aux res = function
-      | []      -> res
-      | c :: cs -> aux (max res c) cs
-    in
-    aux card cards
+  | []            -> invalid_arg "empty list"
+  | card :: cards -> List.fold_left max card cards
 
 (* val isOf : t -> Color.t -> bool *)
 let isOf (_, color) c = (color = c)
@@ -109,10 +84,8 @@ let isSpade card = isOf card Color.Spade
 (* val isHeart : t -> bool *)
 let isHeart card = isOf card Color.Heart
 
-
 (* val isDiamond : t -> bool *)
 let isDiamond card = isOf card Color.Diamond
-
 
 (* val isClub : t -> bool *)
 let isClub card = isOf card Color.Club
