@@ -2,16 +2,18 @@
 (* Are print functions allowed? *)
 
 let rec ft_power x y =
-  if x < 0 || y < 0 then raise (Invalid_argument "Both x and y must be positive");
   let rec aux acc = function
-    | (_, 0)    -> 1
+    | (-1, _)
+    | (_, -1)   -> -1
+    | (0, 0)    -> 1
     | (0, _)    -> 0
+    | (_, 0)    -> acc
     | (a, b)    -> aux (acc * a) (a, b - 1)
   in
   aux 1 (x, y)
 
 let get_target index num =
-  let rec aux n = 
+  let rec aux n =
     if (index mod (ft_power 2 (n - 1))) = 0
     then num - n
     else aux (n - 1)
@@ -36,8 +38,7 @@ let gray number =
   let index = (ft_power 2 number) - 1 in
   let rec aux code i =
     print_string code;
-    if i >= index then ()
-    else begin
+    if i < index then begin
       print_char ' ';
       aux (gray_code code i number) (i + 1)
     end
