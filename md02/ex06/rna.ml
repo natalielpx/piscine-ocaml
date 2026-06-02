@@ -38,8 +38,8 @@ let generate_rna helix =
         | Nucleotide.T    -> Nucleotide.A
         | Nucleotide.C    -> Nucleotide.G
         | Nucleotide.G    -> Nucleotide.C
-        | Nucleotide.U    -> assert false
-        | Nucleotide.None -> assert false
+        | Nucleotide.U    -> raise (Invalid_argument "Invalid nucleobase detected (U)")
+        | Nucleotide.None -> raise (Invalid_argument "Invalid nucleobase detected (None)")
       in
       aux (nucl :: comp) tail
   in

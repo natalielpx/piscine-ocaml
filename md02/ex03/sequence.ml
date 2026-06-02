@@ -1,5 +1,6 @@
 (* Allowed functions : None *)
 
+(** Reverses list *)
 let rev lst =
   let rec aux acc = function
     | []        -> acc
@@ -7,6 +8,7 @@ let rev lst =
   in
   aux [] lst
 
+(** String List to String *)
 let ltos lst =
   let rec aux str = function
     | []        -> str

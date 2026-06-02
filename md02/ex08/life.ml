@@ -1,5 +1,6 @@
 (* Allowed functions : String module *)
 
+(** Reverses a list *)
 let rev lst =
   let rec aux acc = function
     | []        -> acc
@@ -58,4 +59,7 @@ let () =
   print_newline ();
   (* DNA: TCGTATTGAATT -> RNA: AGC AUA ACU UAA -> Ser, Ile, Thr, Stop *)
   print_endline("Result: " ^Ribosome.string_of_protein (life "TCGTATTGAATT"));
+  print_newline ();
+  (* DNA: TCGATTGAATTC -> RNA: AGC UAA CUU AAG -> Ser, Stop *)
+  print_endline("Result: " ^Ribosome.string_of_protein (life "TCGATTGAATTC"));
   print_newline ()

@@ -75,7 +75,7 @@ let complementary_helix helix =
         | Nucleotide.T    -> 'A'
         | Nucleotide.C    -> 'G'
         | Nucleotide.G    -> 'C'
-        | Nucleotide.None -> assert false
+        | Nucleotide.None -> raise (Invalid_argument "Invalid nucleobase detected (None)")
       in
       aux ((Nucleotide.generate_nucleotide base) :: comp) tail
   in

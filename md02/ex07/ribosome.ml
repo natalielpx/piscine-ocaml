@@ -114,65 +114,65 @@ let decode_arn rna =
     | (Nucleotide.G, Nucleotide.C, Nucleotide.A) :: tail
     | (Nucleotide.G, Nucleotide.C, Nucleotide.C) :: tail
     | (Nucleotide.G, Nucleotide.C, Nucleotide.G) :: tail
-    | (Nucleotide.G, Nucleotide.C, Nucleotide.U) :: tail ->  aux (Ala :: acc) tail
+    | (Nucleotide.G, Nucleotide.C, Nucleotide.U) :: tail -> aux (Ala :: acc) tail
     | (Nucleotide.A, Nucleotide.G, Nucleotide.A) :: tail
     | (Nucleotide.A, Nucleotide.G, Nucleotide.G) :: tail
     | (Nucleotide.C, Nucleotide.G, Nucleotide.A) :: tail
     | (Nucleotide.C, Nucleotide.G, Nucleotide.C) :: tail
     | (Nucleotide.C, Nucleotide.G, Nucleotide.G) :: tail
-    | (Nucleotide.C, Nucleotide.G, Nucleotide.U) :: tail ->  aux (Arg :: acc) tail
+    | (Nucleotide.C, Nucleotide.G, Nucleotide.U) :: tail -> aux (Arg :: acc) tail
     | (Nucleotide.A, Nucleotide.A, Nucleotide.C) :: tail
-    | (Nucleotide.A, Nucleotide.A, Nucleotide.U) :: tail ->  aux (Asn :: acc) tail
+    | (Nucleotide.A, Nucleotide.A, Nucleotide.U) :: tail -> aux (Asn :: acc) tail
     | (Nucleotide.G, Nucleotide.A, Nucleotide.C) :: tail
-    | (Nucleotide.G, Nucleotide.A, Nucleotide.U) :: tail ->  aux (Asp :: acc) tail
+    | (Nucleotide.G, Nucleotide.A, Nucleotide.U) :: tail -> aux (Asp :: acc) tail
     | (Nucleotide.U, Nucleotide.G, Nucleotide.C) :: tail
-    | (Nucleotide.U, Nucleotide.G, Nucleotide.U) :: tail ->  aux (Cys :: acc) tail
+    | (Nucleotide.U, Nucleotide.G, Nucleotide.U) :: tail -> aux (Cys :: acc) tail
     | (Nucleotide.C, Nucleotide.A, Nucleotide.A) :: tail
-    | (Nucleotide.C, Nucleotide.A, Nucleotide.G) :: tail ->  aux (Gln :: acc) tail
+    | (Nucleotide.C, Nucleotide.A, Nucleotide.G) :: tail -> aux (Gln :: acc) tail
     | (Nucleotide.G, Nucleotide.A, Nucleotide.A) :: tail
-    | (Nucleotide.G, Nucleotide.A, Nucleotide.G) :: tail ->  aux (Glu :: acc) tail
+    | (Nucleotide.G, Nucleotide.A, Nucleotide.G) :: tail -> aux (Glu :: acc) tail
     | (Nucleotide.G, Nucleotide.G, Nucleotide.A) :: tail
     | (Nucleotide.G, Nucleotide.G, Nucleotide.C) :: tail
     | (Nucleotide.G, Nucleotide.G, Nucleotide.G) :: tail
-    | (Nucleotide.G, Nucleotide.G, Nucleotide.U) :: tail ->  aux (Gly :: acc) tail
+    | (Nucleotide.G, Nucleotide.G, Nucleotide.U) :: tail -> aux (Gly :: acc) tail
     | (Nucleotide.C, Nucleotide.A, Nucleotide.C) :: tail
-    | (Nucleotide.C, Nucleotide.A, Nucleotide.U) :: tail ->  aux (His :: acc) tail
+    | (Nucleotide.C, Nucleotide.A, Nucleotide.U) :: tail -> aux (His :: acc) tail
     | (Nucleotide.A, Nucleotide.U, Nucleotide.A) :: tail
     | (Nucleotide.A, Nucleotide.U, Nucleotide.C) :: tail
-    | (Nucleotide.A, Nucleotide.U, Nucleotide.U) :: tail ->  aux (Ile :: acc) tail
+    | (Nucleotide.A, Nucleotide.U, Nucleotide.U) :: tail -> aux (Ile :: acc) tail
     | (Nucleotide.C, Nucleotide.U, Nucleotide.A) :: tail
     | (Nucleotide.C, Nucleotide.U, Nucleotide.C) :: tail
     | (Nucleotide.C, Nucleotide.U, Nucleotide.G) :: tail
     | (Nucleotide.C, Nucleotide.U, Nucleotide.U) :: tail
     | (Nucleotide.U, Nucleotide.U, Nucleotide.A) :: tail
-    | (Nucleotide.U, Nucleotide.U, Nucleotide.G) :: tail ->  aux (Leu :: acc) tail
+    | (Nucleotide.U, Nucleotide.U, Nucleotide.G) :: tail -> aux (Leu :: acc) tail
     | (Nucleotide.A, Nucleotide.A, Nucleotide.A) :: tail
-    | (Nucleotide.A, Nucleotide.A, Nucleotide.G) :: tail ->  aux (Lys :: acc) tail
-    | (Nucleotide.A, Nucleotide.U, Nucleotide.G) :: tail ->  aux (Met :: acc) tail
+    | (Nucleotide.A, Nucleotide.A, Nucleotide.G) :: tail -> aux (Lys :: acc) tail
+    | (Nucleotide.A, Nucleotide.U, Nucleotide.G) :: tail -> aux (Met :: acc) tail
     | (Nucleotide.U, Nucleotide.U, Nucleotide.C) :: tail
-    | (Nucleotide.U, Nucleotide.U, Nucleotide.U) :: tail ->  aux (Phe :: acc) tail
+    | (Nucleotide.U, Nucleotide.U, Nucleotide.U) :: tail -> aux (Phe :: acc) tail
     | (Nucleotide.C, Nucleotide.C, Nucleotide.C) :: tail
     | (Nucleotide.C, Nucleotide.C, Nucleotide.A) :: tail
     | (Nucleotide.C, Nucleotide.C, Nucleotide.G) :: tail
-    | (Nucleotide.C, Nucleotide.C, Nucleotide.U) :: tail ->  aux (Pro :: acc) tail
+    | (Nucleotide.C, Nucleotide.C, Nucleotide.U) :: tail -> aux (Pro :: acc) tail
     | (Nucleotide.U, Nucleotide.C, Nucleotide.A) :: tail
     | (Nucleotide.U, Nucleotide.C, Nucleotide.C) :: tail
     | (Nucleotide.U, Nucleotide.C, Nucleotide.G) :: tail
     | (Nucleotide.U, Nucleotide.C, Nucleotide.U) :: tail
     | (Nucleotide.A, Nucleotide.G, Nucleotide.U) :: tail
-    | (Nucleotide.A, Nucleotide.G, Nucleotide.C) :: tail ->  aux (Ser :: acc) tail
+    | (Nucleotide.A, Nucleotide.G, Nucleotide.C) :: tail -> aux (Ser :: acc) tail
     | (Nucleotide.A, Nucleotide.C, Nucleotide.A) :: tail
     | (Nucleotide.A, Nucleotide.C, Nucleotide.C) :: tail
     | (Nucleotide.A, Nucleotide.C, Nucleotide.G) :: tail
-    | (Nucleotide.A, Nucleotide.C, Nucleotide.U) :: tail ->  aux (Thr :: acc) tail
-    | (Nucleotide.U, Nucleotide.G, Nucleotide.G) :: tail ->  aux (Trp :: acc) tail
+    | (Nucleotide.A, Nucleotide.C, Nucleotide.U) :: tail -> aux (Thr :: acc) tail
+    | (Nucleotide.U, Nucleotide.G, Nucleotide.G) :: tail -> aux (Trp :: acc) tail
     | (Nucleotide.U, Nucleotide.A, Nucleotide.C) :: tail
-    | (Nucleotide.U, Nucleotide.A, Nucleotide.U) :: tail ->  aux (Tyr :: acc) tail
+    | (Nucleotide.U, Nucleotide.A, Nucleotide.U) :: tail -> aux (Tyr :: acc) tail
     | (Nucleotide.G, Nucleotide.U, Nucleotide.A) :: tail
     | (Nucleotide.G, Nucleotide.U, Nucleotide.C) :: tail
     | (Nucleotide.G, Nucleotide.U, Nucleotide.G) :: tail
-    | (Nucleotide.G, Nucleotide.U, Nucleotide.U) :: tail ->  aux (Val :: acc) tail
-    | _ -> assert false
+    | (Nucleotide.G, Nucleotide.U, Nucleotide.U) :: tail -> aux (Val :: acc) tail
+    | _                                                  -> raise (Invalid_argument "Stop amino acid not found")
   in
   aux [] trips
 
