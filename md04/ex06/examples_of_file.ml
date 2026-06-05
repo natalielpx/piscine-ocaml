@@ -39,7 +39,7 @@ let examples_of_file path =
       let len = Array.length arr in
       (Array.map float_of_string (Array.sub arr 0 (len - 1)), arr.(len - 1))
     in
-    Array.map func (Array.of_list split)
+    List.map func split
   in
 
   (* Return result *)
@@ -55,4 +55,4 @@ let () =
     done;
     print_endline cls;
   in
-  Array.iter print_radar arr
+  List.iter print_radar arr
