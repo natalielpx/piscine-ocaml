@@ -71,4 +71,4 @@ val toStringListVerbose : t -> string list
   * the rest of the deck.
   * If the deck is empty, 
   * raise the exception Failure with a relevant error message. *)
-val drawCard : t -> (Card.t * Card.t list)
+val drawCard : t -> (Card.t * t)
