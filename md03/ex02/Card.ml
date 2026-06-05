@@ -32,7 +32,7 @@ end
 type t = (Value.t * Color.t)
 
 (* val newCard : Value.t -> Color.t -> t *)
-let newCard value color = (value, color)
+let newCard (value : Value.t) (color : Color.t) : t = (value , color)
 
 (* val allSpades : t list *)
 let allSpades = List.map (fun v -> newCard v Color.Spade) Value.all
@@ -50,25 +50,25 @@ let allClubs = List.map (fun v -> newCard v Color.Club) Value.all
 let all = allSpades @ allHearts @ allDiamonds @ allClubs
 
 (* val getValue : t -> Value.t *)
-let getValue (value, _) = value
+let getValue ((value, _) : t) = value
 
 (* val getColor : t -> Color.t *)
-let getColor (_, color) = color
+let getColor ((_, color) : t) = color
 
 (* val toString : t -> string *)
-let toString (value, color) = (Value.toString value) ^ (Color.toString color)
+let toString ((value, color) : t) = (Value.toString value) ^ (Color.toString color)
 
 (* val toStringVerbose : t -> string *)
-let toStringVerbose (value, color) = "Card(" ^ (Value.toStringVerbose value) ^ ", " ^ (Color.toStringVerbose color) ^ ")"
+let toStringVerbose ((value, color) : t) = "Card(" ^ (Value.toStringVerbose value) ^ ", " ^ (Color.toStringVerbose color) ^ ")"
 
 (* val compare : t -> t -> int *)
-let compare (v1, _) (v2, _) = (Value.toInt v1) - (Value.toInt v2)
+let compare ((v1, _) : t) ((v2, _) : t) = (Value.toInt v1) - (Value.toInt v2)
 
 (* val max : t -> t -> t *)
-let max c1 c2 = if compare c1 c2 >= 0 then c1 else c2
+let max (c1 : t) (c2 : t) = if compare c1 c2 >= 0 then c1 else c2
 
 (* val min : t -> t -> t *)
-let min c1 c2 = if compare c1 c2 <= 0 then c1 else c2
+let min (c1 : t) (c2 : t) = if compare c1 c2 <= 0 then c1 else c2
 
 (* val best : t list -> t *)
 let best = function
@@ -76,7 +76,7 @@ let best = function
   | card :: cards -> List.fold_left max card cards
 
 (* val isOf : t -> Color.t -> bool *)
-let isOf (_, color) c = (color = c)
+let isOf ((_, color) : t) (c : Color.t) = (color = c)
 
 (* val isSpade : t -> bool *)
 let isSpade card = isOf card Color.Spade

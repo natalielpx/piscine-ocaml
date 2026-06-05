@@ -24,23 +24,21 @@ module Card = struct
   module Value = Value
   module Color = Color
   type t = (Value.t * Color.t)
-  let newCard value color = (value, color)
+  let newCard (value : Value.t) (color : Color.t) : t = (value , color)
   let allSpades = List.map (fun v -> newCard v Color.Spade) Value.all
   let allHearts = List.map (fun v -> newCard v Color.Heart) Value.all
   let allDiamonds = List.map (fun v -> newCard v Color.Diamond) Value.all
   let allClubs = List.map (fun v -> newCard v Color.Club) Value.all
   let all = allSpades @ allHearts @ allDiamonds @ allClubs
-  let getValue (value, _) = value
-  let getColor (_, color) = color
-  let toString (value, color) = (Value.toString value) ^ (Color.toString color)
-  let toStringVerbose (value, color) = "Card(" ^ (Value.toStringVerbose value) ^ ", " ^ (Color.toStringVerbose color) ^ ")"
-  let compare (v1, _) (v2, _) = (Value.toInt v1) - (Value.toInt v2)
-  let max c1 c2 = if compare c1 c2 >= 0 then c1 else c2
-  let min c1 c2 = if compare c1 c2 <= 0 then c1 else c2
-  let best = function
-    | []            -> invalid_arg "empty list"
-    | card :: cards -> List.fold_left max card cards
-  let isOf (_, color) c = (color = c)
+  let getValue ((value, _) : t) = value
+  let getColor ((_, color) : t) = color
+  let toString ((value, color) : t) = (Value.toString value) ^ (Color.toString color)
+  let toStringVerbose ((value, color) : t) = "Card(" ^ (Value.toStringVerbose value) ^ ", " ^ (Color.toStringVerbose color) ^ ")"
+  let compare ((v1, _) : t) ((v2, _) : t) = (Value.toInt v1) - (Value.toInt v2)
+  let max (c1 : t) (c2 : t) = if compare c1 c2 >= 0 then c1 else c2
+  let min (c1 : t) (c2 : t) = if compare c1 c2 <= 0 then c1 else c2
+  let best = function | [] -> invalid_arg "empty list" | card :: cards -> List.fold_left max card cards
+  let isOf ((_, color) : t) (c : Color.t) = (color = c)
   let isSpade card = isOf card Color.Spade
   let isHeart card = isOf card Color.Heart
   let isDiamond card = isOf card Color.Diamond
@@ -58,13 +56,13 @@ type t = Card.t list
 let newDeck () =
   let compare (x, _) (y, _) = x - y in
   let random = List.map (fun c -> (Random.int 1000000, c)) Card.all in
-  List.map (fun (_, c) -> c) (List.sort compare random)
+  (List.map (fun (_, c) -> c) (List.sort compare random) : t)
 
 
 (** Write a function toStringList that 
   * takes a deck as a parameter and 
   * returns a list of the string representations of each card. *)
-let toStringList deck =
+let toStringList (deck : t) =
   let rec aux acc = function
   | []      -> acc
   | c :: cs -> aux ((Card.toString c) :: acc ) cs
@@ -74,7 +72,7 @@ let toStringList deck =
 (** Write a function toStringListVerbose that 
   * takes a deck as a parameter and 
   * returns a list of the verbose string representations of each card. *)
-let toStringListVerbose deck =
+let toStringListVerbose (deck : t) =
   let rec aux acc = function
     | []      -> acc
     | c :: cs -> aux ((Card.toStringVerbose c) :: acc ) cs
@@ -88,6 +86,7 @@ let toStringListVerbose deck =
   * the rest of the deck.
   * If the deck is empty, 
   * raise the exception Failure with a relevant error message. *)
-let drawCard = function
+let drawCard (deck : t) : Card.t * t =
+  match deck with
   | card :: rest  -> (card, rest)
   | []            -> raise (Failure "Deck is empty")
