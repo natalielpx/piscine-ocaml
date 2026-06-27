@@ -32,7 +32,7 @@ let examples_of_file path =
     aux [] lines
   in
 
-  (* Transform split (lists of lists of strings) into arrays of (float array * string) tuples *)
+  (* Transform split (lists of lists of strings) into list of (float array * string) tuples *)
   let radars =
     let func lst = 
       let arr = Array.of_list lst in
@@ -47,7 +47,7 @@ let examples_of_file path =
 
 (** Demonstration Program *)
 let () =
-  let arr = examples_of_file "./ionosphere.test.csv" in
+  let lst = examples_of_file "./ionosphere.test.csv" in
   let print_radar (flts, cls) =
     for i = 0 to Array.length flts - 1 do
       print_float flts.(i);
@@ -55,4 +55,4 @@ let () =
     done;
     print_endline cls;
   in
-  List.iter print_radar arr
+  List.iter print_radar lst
