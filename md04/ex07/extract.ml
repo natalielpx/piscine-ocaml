@@ -1,0 +1,40 @@
+let extract path =
+
+  (* Open file *)
+  let in_channel = 
+    try open_in path
+    with e -> failwith "Unable to open file"
+  in
+
+  (* Read lines *)
+  let lines =
+    let rec aux acc =
+      match input_line in_channel with
+      | line                  -> aux (line :: acc)
+      | exception End_of_file -> close_in in_channel; acc
+      | exception e           -> close_in_noerr in_channel; failwith "Unexpected error occured"
+    in
+    aux []
+  in
+
+  (* Parse lines (list of strings) into lists of lists of strings *)
+  let split = 
+    let rec aux acc = function
+    | []            -> acc
+    | head :: tail  -> aux (((String.split_on_char ',' head)) :: acc) tail
+    in
+    aux [] lines
+  in
+
+  (* Transform split (lists of lists of strings) into list of (float array * string) tuples *)
+  let radars =
+    let func lst = 
+      let arr = Array.of_list lst in
+      let len = Array.length arr in
+      (Array.map float_of_string (Array.sub arr 0 (len - 1)), arr.(len - 1))
+    in
+    List.map func split
+  in
+
+  (* Return result *)
+  radars
